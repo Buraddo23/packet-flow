@@ -82,21 +82,22 @@ namespace WindowsFormsApp1 {
 			
 			//Functia send pt pipe bidirectional
 			public void send(Packet p, string dest) {
-				Console.WriteLine("dest: {0}", dest);
-				
 				Thread.Sleep(2000); //Simulare 2 secunde pt transmitere
 				
 				//Determinarea capatului dorit
-				if (c1.getId() == dest)
+				if (c1.getId() == dest) {
 					p.movePacket(c1);
-				else if (c2.getId() == dest)
+					Console.WriteLine("Pachet mutat din {0} in {1} prin {2}", c1.getId(), c2.getId(), getId());
+				} else if (c2.getId() == dest) {
 					p.movePacket(c2);
-				else Console.WriteLine("Destinatie invalida pipe {0}", identifier);
+					Console.WriteLine("Pachet mutat din {0} in {1} prin {2}", c2.getId(), c1.getId(), getId());
+				} else Console.WriteLine("Destinatie invalida pipe {0}", identifier);
 			}
 			
 			//Functia send pt pipe unidirectional
 			public void send(Packet p) {
 				Thread.Sleep(2000);
+				Console.WriteLine("Pachet mutat din {0} in {1} prin {2}", c1.getId(), c2.getId(), getId());
 				p.movePacket(c2);
 			}
 			
@@ -153,6 +154,7 @@ namespace WindowsFormsApp1 {
 				while(!bf);
 				
 				Thread.Sleep(500);
+				Console.WriteLine("Pachet mutat in {0} prin {1}", cc, getId());
 				if (cc == "Router") {
 					p.movePacket(r);
 				} else {
@@ -239,7 +241,6 @@ namespace WindowsFormsApp1 {
 			//Muta pachetul mai departe in retea si cheama functia de finalizare sau reapeleaza serviciul de rutare
 			public void movePacket(Component c) {
 				actualPosition = c;
-				Console.WriteLine("Pachet mutat in {0}", c.getId());
 				
 				if (actualPosition == destination) {
 					Thread.Sleep(1000);
@@ -333,18 +334,18 @@ namespace WindowsFormsApp1 {
 			Bus b = new Bus("Bus", c[1], c[2], c[3], c[4], c[5], r);
 			
 			//Star Pipes
-			Pipe p10_12 = new Pipe("10-12", c[10], c[12], true);
-			Pipe p10_11 = new Pipe("10-11", c[10], c[11], true);
-			Pipe p10_9  = new Pipe("10-9" , c[10], c[9] , true);
+			Pipe p10_12 = new Pipe("Pipe 10-12", c[10], c[12], true);
+			Pipe p10_11 = new Pipe("Pipe 10-11", c[10], c[11], true);
+			Pipe p10_9  = new Pipe("Pipe 10-9" , c[10], c[9] , true);
 			
 			//Ring Pipes
-			Pipe p6_8 = new Pipe("6-8", c[6], c[8], false);
-			Pipe p8_7 = new Pipe("8-7", c[8], c[7], false);
-			Pipe p7_6 = new Pipe("7-6", c[7], c[6], false);
+			Pipe p6_8 = new Pipe("Pipe 6-8", c[6], c[8], false);
+			Pipe p8_7 = new Pipe("Pipe 8-7", c[8], c[7], false);
+			Pipe p7_6 = new Pipe("Pipe 7-6", c[7], c[6], false);
 			
 			//Router Pipes
-			Pipe pr_10 = new Pipe("R-10", r, c[10], true);
-			Pipe pr_6  = new Pipe("R-6" , r, c[6] , true);
+			Pipe pr_10 = new Pipe("Pipe R-10", r, c[10], true);
+			Pipe pr_6  = new Pipe("Pipe R-6" , r, c[6] , true);
 			
 			//Creeri de pachete:
 			/*Packet p1 = new Packet(c[10], c[12], 255);
