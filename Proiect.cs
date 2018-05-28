@@ -86,11 +86,11 @@ namespace WindowsFormsApp1 {
 				
 				//Determinarea capatului dorit
 				if (c1.getId() == dest) {
-					p.movePacket(c1);
-					Console.WriteLine("Pachet mutat din {0} in {1} prin {2}", c1.getId(), c2.getId(), getId());
-				} else if (c2.getId() == dest) {
-					p.movePacket(c2);
 					Console.WriteLine("Pachet mutat din {0} in {1} prin {2}", c2.getId(), c1.getId(), getId());
+					p.movePacket(c1);
+				} else if (c2.getId() == dest) {
+					Console.WriteLine("Pachet mutat din {0} in {1} prin {2}", c1.getId(), c2.getId(), getId());
+					p.movePacket(c2);
 				} else Console.WriteLine("Destinatie invalida pipe {0}", identifier);
 			}
 			
@@ -358,8 +358,8 @@ namespace WindowsFormsApp1 {
 			Packet p8 = new Packet(c[11], c[9], 2);
 			new Packet(c[1], c[2], 1);
 			new Packet(c[3], c[5], 3);
-			new Packet(c[4], c[12], 4);
-			new Packet(c[8], c[1], 8);*/
+			new Packet(c[4], c[12], 4);*/
+			new Packet(c[9], c[12], 8);
 		}
 	}
 }
